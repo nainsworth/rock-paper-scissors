@@ -8,4 +8,11 @@ function computerPlay() {
     return computerChoice;
 }
 
-console.log(computerPlay());
+// Player's Game Choice
+function playersPlay(playersChoice) {
+    //Take users input and split first lett and rest
+    playersChoice = playersChoice[0].toUpperCase() + playersChoice.slice(1).toLowerCase();
+
+    //Return player selection
+    return playersChoice;
+}
