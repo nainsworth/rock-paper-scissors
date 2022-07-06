@@ -1,4 +1,3 @@
-
 // Computer's Game Choice
 function computerPlay() {
     //Randomly select numbers between 1-3
@@ -20,7 +19,7 @@ function computerPlay() {
     return computerChoice;
 }
 
-// Player's Game Choice
+// Player's Game Choice String Conversion
 function playersPlay(playersChoice) {
     //Take users input and split first lett and rest
     playersChoice = playersChoice[0].toUpperCase() + playersChoice.slice(1).toLowerCase();
@@ -28,4 +27,67 @@ function playersPlay(playersChoice) {
     //Return player selection
     return playersChoice;
 }
-console.log(computerPlay());
+
+// Compares computer's and player's selection to determine winner
+function playRound (playerSelection, computerSelection) {
+    let results = "";
+
+console.log(playerSelection, computerSelection);
+
+    // Rock Conditions
+    // Win
+    if (playerSelection === "Rock" && computerSelection === "Scissors") {
+        results = `YOU WIN! ${playerSelection} beats ${computerSelection}!`;
+    }
+    // Lose
+    else if (playerSelection === "Rock" && computerSelection === "Paper") {
+        results = `YOU LOSE! ${computerSelection} beats ${playerSelection}!`;
+    }
+    // Tie
+    else if (playerSelection === "Rock" && computerSelection === "Rock") {
+        results = `TIE GAME!`;
+    }
+
+    // Paper Conditions
+    // Win
+    else if (playerSelection === "Paper" && computerSelection === "Rock") {
+        results = `YOU WIN! ${playerSelection} beats ${computerSelection}!`
+    }
+    // Lose
+    else if (playerSelection === "Paper" && computerSelection === "Scissors") {
+        results = `YOU LOSE! ${computerSelection} beats ${playerSelection}!`
+    }
+    // Tie
+    else if (playerSelection === "Paper" && computerSelection === "Paper") {
+        results = `TIE GAME!`
+    }
+
+    // Scissors Conditions
+    // Win
+    else if (playerSelection === "Scissors" && computerSelection === "Paper") {
+        results = `YOU WIN! ${playerSelection} beats ${computerSelection}!`
+    }
+    // Lose
+    else if (playerSelection === "Scissors" && computerSelection === "Rock") {
+        results = `YOU LOSE! ${computerSelection} beats ${playerSelection}!`
+    }
+    // Tie
+    else if (playerSelection === "Scissors" && computerSelection === "Scissors") {
+        results = `TIE GAME!`
+    }
+
+   // Error
+    else {
+        results = `ERROR! Something went wrong!`
+    }
+    // Return game result
+    return results;
+}
+
+
+// Variable for the plays
+const computer = computerPlay();
+const player = playersPlay("Rock");
+
+
+console.log(playRound(player, computer));
