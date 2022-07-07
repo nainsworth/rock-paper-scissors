@@ -32,8 +32,6 @@ function playersPlay(playersChoice) {
 function playRound (playerSelection, computerSelection) {
     let results = "";
 
-console.log(playerSelection, computerSelection);
-
     // Rock Conditions
     // Win
     if (playerSelection === "Rock" && computerSelection === "Scissors") {
@@ -84,10 +82,54 @@ console.log(playerSelection, computerSelection);
     return results;
 }
 
+function game() {
+    // Variable to count round wins
+    let playerWins = 0;
+    let computerWins = 0;
+    let winner = "";
+    let player = "Rock";
+    let gameWin = false;
+    let gameLose = false;
+       
+    // Create a loop for 5 games
+    for (let i = 0; i < 5; i++) {
+        // Determine winner from round results
+        gameWin = playRound(player, computerPlay()).includes("WIN");
+        gameLose = playRound(player, computerPlay()).includes("LOSE");
+        //console.log(playRound(player, computerPlay()));
+        //console.log(gameWin, gameLose);
+        // Tie and round repeats
+        if (gameWin === false && gameLose === false) {
+            i--;
+        }
+        // Player Wins
+        else if (gameWin === true){
+            playerWins++; 
+            gameLose = false
+        } 
+        // Computer Wins
+        else if (gameLose === true) {
+            computerWins++;
+            gameWin = false;
+        }
+        
+        // Error
+        else {
+            return winner = `Error: Something went wrong in the game!`
+        }
+        console.log(playerWins, computerWins); 
 
-// Variable for the plays
-const computer = computerPlay();
-const player = playersPlay("Rock");
+        // First to win 3 Games win
+        // Player wins the game
+        if (playerWins == 3) {
+            return winner = `YOU WIN THE GAME! Player: ${playerWins} Computer: ${computerWins}`
+        }
+        // Computer wins the game
+        else if (computerWins == 3) {
+            return winner = `YOU LOST THE GAME! Player: ${playerWins} Computer: ${computerWins}`
+        }
 
+    }
+}
 
-console.log(playRound(player, computer));
+console.log(game());
