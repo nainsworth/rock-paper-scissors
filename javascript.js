@@ -73,12 +73,12 @@ function playRound (playerSelection, computerSelection) {
     else if (playerSelection === "Scissors" && computerSelection === "Scissors") {
         results = `TIE GAME!`
     }
-
    // Error
     else {
         results = `ERROR! Something went wrong!`
     }
     // Return game result
+    console.log(results);
     return results;
 }
 
@@ -86,47 +86,47 @@ function game() {
     // Variable to count round wins
     let playerWins = 0;
     let computerWins = 0;
-    let winner = "";
-    let player = "Rock";
     let gameWin = false;
     let gameLose = false;
-       
+    
     // Create a loop for 5 games
     for (let i = 0; i < 5; i++) {
+        let player = prompt("Rock Paper Scissors?");
+        let roundResult = playRound(playersPlay(player), computerPlay());
+
         // Determine winner from round results
-        gameWin = playRound(player, computerPlay()).includes("WIN");
-        gameLose = playRound(player, computerPlay()).includes("LOSE");
-        //console.log(playRound(player, computerPlay()));
-        //console.log(gameWin, gameLose);
+        gameWin = roundResult.includes("WIN");
+        gameLose = roundResult.includes("LOSE");
         // Tie and round repeats
         if (gameWin === false && gameLose === false) {
             i--;
+            console.log(`Player: ${playerWins} - Computer: ${computerWins}`);
         }
         // Player Wins
         else if (gameWin === true){
             playerWins++; 
             gameLose = false
+            console.log(`Player: ${playerWins} - Computer: ${computerWins}`);
         } 
         // Computer Wins
         else if (gameLose === true) {
             computerWins++;
             gameWin = false;
+            console.log(`Player: ${playerWins} - Computer: ${computerWins}`);
         }
-        
         // Error
         else {
             return winner = `Error: Something went wrong in the game!`
         }
-        console.log(playerWins, computerWins); 
 
         // First to win 3 Games win
         // Player wins the game
         if (playerWins == 3) {
-            return winner = `YOU WIN THE GAME! Player: ${playerWins} Computer: ${computerWins}`
+            return winner = `YOU WIN THE GAME! Player: ${playerWins} - Computer: ${computerWins}`;
         }
         // Computer wins the game
         else if (computerWins == 3) {
-            return winner = `YOU LOST THE GAME! Player: ${playerWins} Computer: ${computerWins}`
+            return winner = `YOU LOST THE GAME! Player: ${playerWins} - Computer: ${computerWins}`;
         }
 
     }
