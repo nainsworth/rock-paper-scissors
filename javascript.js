@@ -82,54 +82,62 @@ function playRound (playerSelection, computerSelection) {
     return results;
 }
 
-function game() {
-    // Variable to count round wins
-    let playerWins = 0;
-    let computerWins = 0;
-    let gameWin = false;
-    let gameLose = false;
+// function game() {
+//     // Variable to count round wins
+//     let playerWins = 0;
+//     let computerWins = 0;
+//     let gameWin = false;
+//     let gameLose = false;
     
-    // Create a loop for 5 games
-    for (let i = 0; i < 5; i++) {
-        let player = prompt("Rock Paper Scissors?");
-        let roundResult = playRound(playersPlay(player), computerPlay());
+//     // Create a loop for 5 games
+//     for (let i = 0; i < 5; i++) {
+//         let player = prompt("Rock Paper Scissors?");
+//         let roundResult = playRound(playersPlay(player), computerPlay());
 
-        // Determine winner from round results
-        gameWin = roundResult.includes("WIN");
-        gameLose = roundResult.includes("LOSE");
-        // Tie and round repeats
-        if (gameWin === false && gameLose === false) {
-            i--;
-            console.log(`Player: ${playerWins} - Computer: ${computerWins}`);
-        }
-        // Player Wins
-        else if (gameWin === true){
-            playerWins++; 
-            gameLose = false
-            console.log(`Player: ${playerWins} - Computer: ${computerWins}`);
-        } 
-        // Computer Wins
-        else if (gameLose === true) {
-            computerWins++;
-            gameWin = false;
-            console.log(`Player: ${playerWins} - Computer: ${computerWins}`);
-        }
-        // Error
-        else {
-            return winner = `Error: Something went wrong in the game!`
-        }
+//         // Determine winner from round results
+//         gameWin = roundResult.includes("WIN");
+//         gameLose = roundResult.includes("LOSE");
+//         // Tie and round repeats
+//         if (gameWin === false && gameLose === false) {
+//             i--;
+//             console.log(`Player: ${playerWins} - Computer: ${computerWins}`);
+//         }
+//         // Player Wins
+//         else if (gameWin === true){
+//             playerWins++; 
+//             gameLose = false
+//             console.log(`Player: ${playerWins} - Computer: ${computerWins}`);
+//         } 
+//         // Computer Wins
+//         else if (gameLose === true) {
+//             computerWins++;
+//             gameWin = false;
+//             console.log(`Player: ${playerWins} - Computer: ${computerWins}`);
+//         }
+//         // Error
+//         else {
+//             return winner = `Error: Something went wrong in the game!`
+//         }
 
-        // First to win 3 Games win
-        // Player wins the game
-        if (playerWins == 3) {
-            return winner = `YOU WIN THE GAME! Player: ${playerWins} - Computer: ${computerWins}`;
-        }
-        // Computer wins the game
-        else if (computerWins == 3) {
-            return winner = `YOU LOST THE GAME! Player: ${playerWins} - Computer: ${computerWins}`;
-        }
+//         // First to win 3 Games win
+//         // Player wins the game
+//         if (playerWins == 3) {
+//             return winner = `YOU WIN THE GAME! Player: ${playerWins} - Computer: ${computerWins}`;
+//         }
+//         // Computer wins the game
+//         else if (computerWins == 3) {
+//             return winner = `YOU LOST THE GAME! Player: ${playerWins} - Computer: ${computerWins}`;
+//         }
 
-    }
-}
+//     }
+// }
 
-console.log(game());
+// console.log(game());
+
+const playButton = document.querySelectorAll("button");
+playButton.forEach((button) => {
+    button.addEventListener("click", function (e) {
+        playRound(this.value, computerPlay());
+    });
+});
+    
