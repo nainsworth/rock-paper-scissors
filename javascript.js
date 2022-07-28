@@ -135,9 +135,14 @@ function playRound (playerSelection, computerSelection) {
 // console.log(game());
 
 const playButton = document.querySelectorAll("button");
+const resultContainer = document.querySelector("#resultContainer");
+const gameResult = document.createElement("p");
+gameResult.classList.add("gameResult");
+
 playButton.forEach((button) => {
     button.addEventListener("click", function (e) {
-        playRound(this.value, computerPlay());
+        gameResult.innerText = playRound(this.value, computerPlay());
+        resultContainer.appendChild(gameResult);
     });
 });
     
