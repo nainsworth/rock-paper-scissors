@@ -79,6 +79,8 @@ function playRound (playerSelection, computerSelection) {
     }
     // Return game result
     console.log(results);
+    resultContainer.appendChild(gameResult);
+
     return results;
 }
 
@@ -139,10 +141,7 @@ const resultContainer = document.querySelector("#resultContainer");
 const gameResult = document.createElement("p");
 gameResult.classList.add("gameResult");
 
-playButton.forEach((button) => {
-    button.addEventListener("click", function (e) {
+playButton.forEach(button => button.addEventListener("click", function (e) {
         gameResult.innerText = playRound(this.value, computerPlay());
-        resultContainer.appendChild(gameResult);
-    });
-});
+}));
     
