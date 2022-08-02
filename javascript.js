@@ -1,88 +1,127 @@
-// Computer's Game Choice
-function computerPlay() {
-    //Randomly select numbers between 1-3
-    let randomNum = Math.floor(Math.random() * 3) + 1;
-    let computerChoice = "";
+const gameContainer = document.querySelector("#gameContainer");
+const startTxt = document.createElement("p");
+const startGame = document.createElement("button");
+const gameTxt = document.createElement("p");
+const rockBtn = document.createElement("button");
+const paperBtn = document.createElement("button");
+const scissorsBtn = document.createElement("button");
+// classLists
+startTxt.classList.add("startTxt");
+startGame.classList.add("startGame");
+gameTxt.classList.add("gameTxt")
+rockBtn.classList.add("gameBtn");
+paperBtn.classList.add("gameBtn");
+scissorsBtn.classList.add("gameBtn");
+// innerTexts
+startTxt.innerText = "Play a game of Rock Paper Scissors?";
+startGame.innerText = "Start Game";
+gameTxt.innerText = "Choose Rock, Paper, or Scissors";
+rockBtn.innerText = "Rock";
+paperBtn.innerText = "Paper";
+scissorsBtn.innerText = "Scissors"
 
-    //Convert Random Number to a selection string (i.e. Rock = 1, Paper = 2, Scissors = 3)
-    if (randomNum === 1) {
-        computerChoice = "Rock";
-    }
-    else if (randomNum === 2) {
-        computerChoice = "Paper";
-    }
-    else {
-        computerChoice = "Scissors";
-    }
-
-    //Return random selection
-    return computerChoice;
+gameContainer.appendChild(startTxt);
+gameContainer.appendChild(startGame);
+// Start Game once button is clicked
+startGame.addEventListener("click", () => {
+    // Removes Start Game Text and Button
+    gameContainer.removeChild(startTxt);
+    gameContainer.removeChild(startGame);
+    // Adds Game Text and Button
+    gameChoices();
+})
+  
+// Creates Game Choices
+function gameChoices() {
+    gameContainer.appendChild(gameTxt);
+    gameContainer.appendChild(rockBtn);
+    gameContainer.appendChild(paperBtn);
+    gameContainer.appendChild(scissorsBtn);
 }
 
-// Player's Game Choice String Conversion
-function playersPlay(playersChoice) {
-    //Take users input and split first lett and rest
-    playersChoice = playersChoice[0].toUpperCase() + playersChoice.slice(1).toLowerCase();
+ // Computer's Game Choice
+ function computerPlay() {
+     //Randomly select numbers between 1-3
+     let randomNum = Math.floor(Math.random() * 3) + 1;
+     let computerChoice = "";
+     //Convert Random Number to a selection string (i.e. Rock = 1, Paper = 2, Scissors = 3)
+     if (randomNum === 1) {
+         computerChoice = "Rock";
+     }
+     else if (randomNum === 2) {
+         computerChoice = "Paper";
+     }
+     else {
+         computerChoice = "Scissors";
+     }
+     //Return random selection
+     return computerChoice;
+ }
 
-    //Return player selection
-    return playersChoice;
-}
+ // Function no longer needed since button inputs are now used
+// // Player's Game Choice String Conversion
+// function playersPlay(playersChoice) {
+//     //Take users input and split first lett and rest
+//     playersChoice = playersChoice[0].toUpperCase() + playersChoice.slice(1).toLowerCase();
 
-// Compares computer's and player's selection to determine winner
-function playRound (playerSelection, computerSelection) {
-    let results = "";
+//     //Return player selection
+//     return playersChoice;
+// }
 
-    // Rock Conditions
-    // Win
-    if (playerSelection === "Rock" && computerSelection === "Scissors") {
-        results = `YOU WIN! ${playerSelection} beats ${computerSelection}!`;
-    }
-    // Lose
-    else if (playerSelection === "Rock" && computerSelection === "Paper") {
-        results = `YOU LOSE! ${computerSelection} beats ${playerSelection}!`;
-    }
-    // Tie
-    else if (playerSelection === "Rock" && computerSelection === "Rock") {
-        results = `TIE GAME!`;
-    }
+// // Compares computer's and player's selection to determine winner
+// function playRound (playerSelection, computerSelection) {
+//     let results = "";
 
-    // Paper Conditions
-    // Win
-    else if (playerSelection === "Paper" && computerSelection === "Rock") {
-        results = `YOU WIN! ${playerSelection} beats ${computerSelection}!`
-    }
-    // Lose
-    else if (playerSelection === "Paper" && computerSelection === "Scissors") {
-        results = `YOU LOSE! ${computerSelection} beats ${playerSelection}!`
-    }
-    // Tie
-    else if (playerSelection === "Paper" && computerSelection === "Paper") {
-        results = `TIE GAME!`
-    }
+//     // Rock Conditions
+//     // Win
+//     if (playerSelection === "Rock" && computerSelection === "Scissors") {
+//         results = `YOU WIN! ${playerSelection} beats ${computerSelection}!`;
+//     }
+//     // Lose
+//     else if (playerSelection === "Rock" && computerSelection === "Paper") {
+//         results = `YOU LOSE! ${computerSelection} beats ${playerSelection}!`;
+//     }
+//     // Tie
+//     else if (playerSelection === "Rock" && computerSelection === "Rock") {
+//         results = `TIE GAME!`;
+//     }
 
-    // Scissors Conditions
-    // Win
-    else if (playerSelection === "Scissors" && computerSelection === "Paper") {
-        results = `YOU WIN! ${playerSelection} beats ${computerSelection}!`
-    }
-    // Lose
-    else if (playerSelection === "Scissors" && computerSelection === "Rock") {
-        results = `YOU LOSE! ${computerSelection} beats ${playerSelection}!`
-    }
-    // Tie
-    else if (playerSelection === "Scissors" && computerSelection === "Scissors") {
-        results = `TIE GAME!`
-    }
-   // Error
-    else {
-        results = `ERROR! Something went wrong!`
-    }
-    // Return game result
-    console.log(results);
-    resultContainer.appendChild(gameResult);
+//     // Paper Conditions
+//     // Win
+//     else if (playerSelection === "Paper" && computerSelection === "Rock") {
+//         results = `YOU WIN! ${playerSelection} beats ${computerSelection}!`
+//     }
+//     // Lose
+//     else if (playerSelection === "Paper" && computerSelection === "Scissors") {
+//         results = `YOU LOSE! ${computerSelection} beats ${playerSelection}!`
+//     }
+//     // Tie
+//     else if (playerSelection === "Paper" && computerSelection === "Paper") {
+//         results = `TIE GAME!`
+//     }
 
-    return results;
-}
+//     // Scissors Conditions
+//     // Win
+//     else if (playerSelection === "Scissors" && computerSelection === "Paper") {
+//         results = `YOU WIN! ${playerSelection} beats ${computerSelection}!`
+//     }
+//     // Lose
+//     else if (playerSelection === "Scissors" && computerSelection === "Rock") {
+//         results = `YOU LOSE! ${computerSelection} beats ${playerSelection}!`
+//     }
+//     // Tie
+//     else if (playerSelection === "Scissors" && computerSelection === "Scissors") {
+//         results = `TIE GAME!`
+//     }
+//    // Error
+//     else {
+//         results = `ERROR! Something went wrong!`
+//     }
+//     // Return game result
+//     console.log(results);
+
+//     return results;
+// }
 
 // function game() {
 //     // Variable to count round wins
@@ -90,11 +129,22 @@ function playRound (playerSelection, computerSelection) {
 //     let computerWins = 0;
 //     let gameWin = false;
 //     let gameLose = false;
+//     const playButton = document.querySelectorAll("button");
+//     const gameResult = document.createElement("p");
+//     let gameButton = "";
+
+    
     
 //     // Create a loop for 5 games
 //     for (let i = 0; i < 5; i++) {
-//         let player = prompt("Rock Paper Scissors?");
-//         let roundResult = playRound(playersPlay(player), computerPlay());
+//         // playButton.forEach(button => button.addEventListener("click", function (e) {
+//         //     gameButton = this.value;
+//         //     gameResult.innerText = playRound(gameButton, computerPlay());
+//         //     gameResult.classList.add("gameResult");
+//         //     //resultContainer.appendChild(gameResult);
+
+//         // }));
+//         let roundResult = playRound(gameButton, computerPlay());
 
 //         // Determine winner from round results
 //         gameWin = roundResult.includes("WIN");
@@ -134,14 +184,5 @@ function playRound (playerSelection, computerSelection) {
 //     }
 // }
 
-// console.log(game());
 
-const playButton = document.querySelectorAll("button");
-const resultContainer = document.querySelector("#resultContainer");
-const gameResult = document.createElement("p");
-gameResult.classList.add("gameResult");
 
-playButton.forEach(button => button.addEventListener("click", function (e) {
-        gameResult.innerText = playRound(this.value, computerPlay());
-}));
-    
