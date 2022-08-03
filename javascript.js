@@ -5,6 +5,12 @@ const gameTxt = document.createElement("p");
 const rockBtn = document.createElement("button");
 const paperBtn = document.createElement("button");
 const scissorsBtn = document.createElement("button");
+const resultContainer = document.querySelector("#resultContainer");
+const gameResult = document.createElement("p");
+const scoreBoard = document.createElement("p");
+
+let playerWins = 0;
+let computerWins = 0;
 // classLists
 startTxt.classList.add("startTxt");
 startGame.classList.add("startGame");
@@ -12,24 +18,34 @@ gameTxt.classList.add("gameTxt")
 rockBtn.classList.add("gameBtn");
 paperBtn.classList.add("gameBtn");
 scissorsBtn.classList.add("gameBtn");
+// Button IDs
+rockBtn.id = "Rock";
+paperBtn.id = "Paper";
+scissorsBtn.id = "Scissors";
 // innerTexts
 startTxt.innerText = "Play a game of Rock Paper Scissors?";
 startGame.innerText = "Start Game";
-gameTxt.innerText = "Choose Rock, Paper, or Scissors";
+gameTxt.innerText = "Choose!";
 rockBtn.innerText = "Rock";
 paperBtn.innerText = "Paper";
 scissorsBtn.innerText = "Scissors"
 
-gameContainer.appendChild(startTxt);
-gameContainer.appendChild(startGame);
-// Start Game once button is clicked
-startGame.addEventListener("click", () => {
-    // Removes Start Game Text and Button
-    gameContainer.removeChild(startTxt);
-    gameContainer.removeChild(startGame);
-    // Adds Game Text and Button
-    gameChoices();
-})
+// Start Game Function
+window.onload = function newGame() {
+    gameContainer.appendChild(startTxt);
+    gameContainer.appendChild(startGame);
+    // Start Game once button is clicked
+    startGame.addEventListener("click", () => {
+        // Score Rest
+        playerWins = 0;
+        computerWins = 0;
+        // Removes Start Game Text and Button
+        gameContainer.removeChild(startTxt);
+        gameContainer.removeChild(startGame);
+        // Adds Game Text and Button
+        game();
+    })
+}
   
 // Creates Game Choices
 function gameChoices() {
@@ -69,60 +85,96 @@ function gameChoices() {
 // }
 
 // // Compares computer's and player's selection to determine winner
-// function playRound (playerSelection, computerSelection) {
-//     let results = "";
+function playRound (playerSelection, computerSelection) { 
+    let results = "";
+    // Rock Conditions
+    // Win
+    if (playerSelection === "Rock" && computerSelection === "Scissors") {
+        results = `YOU WIN! ${playerSelection} beats ${computerSelection}!`;
+    }
+    // Lose
+    else if (playerSelection === "Rock" && computerSelection === "Paper") {
+        results = `YOU LOSE! ${computerSelection} beats ${playerSelection}!`;
+    }
+    // Tie
+    else if (playerSelection === "Rock" && computerSelection === "Rock") {
+        results = `TIE GAME!`;
+    }
+    // Paper Conditions
+    // Win
+    else if (playerSelection === "Paper" && computerSelection === "Rock") {
+        results = `YOU WIN! ${playerSelection} beats ${computerSelection}!`
+    }
+    // Lose
+    else if (playerSelection === "Paper" && computerSelection === "Scissors") {
+        results = `YOU LOSE! ${computerSelection} beats ${playerSelection}!`
+    }
+    // Tie
+    else if (playerSelection === "Paper" && computerSelection === "Paper") {
+        results = `TIE GAME!`
+    }
+    // Scissors Conditions
+    // Win
+    else if (playerSelection === "Scissors" && computerSelection === "Paper") {
+        results = `YOU WIN! ${playerSelection} beats ${computerSelection}!`
+    }
+    // Lose
+    else if (playerSelection === "Scissors" && computerSelection === "Rock") {
+        results = `YOU LOSE! ${computerSelection} beats ${playerSelection}!`
+    }
+    // Tie
+    else if (playerSelection === "Scissors" && computerSelection === "Scissors") {
+        results = `TIE GAME!`
+    }
+   // Error
+    else {
+        results = `ERROR! Something went wrong!`
+    }
+    // Return game result
+    console.log(results);
+    return results;
+}
 
-//     // Rock Conditions
-//     // Win
-//     if (playerSelection === "Rock" && computerSelection === "Scissors") {
-//         results = `YOU WIN! ${playerSelection} beats ${computerSelection}!`;
-//     }
-//     // Lose
-//     else if (playerSelection === "Rock" && computerSelection === "Paper") {
-//         results = `YOU LOSE! ${computerSelection} beats ${playerSelection}!`;
-//     }
-//     // Tie
-//     else if (playerSelection === "Rock" && computerSelection === "Rock") {
-//         results = `TIE GAME!`;
-//     }
+function score(round) {
+    //         let roundResult = playRound(gameButton, computerPlay());
+    // Determine winner from round results
+    let gameWin = round.includes("WIN");
+    let gameLose = round.includes("LOSE");
+    // Tie Game
+    if (gameWin === false && gameLose === false){
+        return [playerWins, computerWins];
+    }
+    // Player Wins 
+    else if (gameWin === true){
+        playerWins++;
+        return [playerWins, computerWins];
+    } 
+    // Computer Wins
+    else if (gameLose === true) {
+        computerWins++;
+        return [playerWins, computerWins];
+    }
+    // Error
+    else {
+        return alert(`Error: Something went wrong in the game!`);
+    }
+}
 
-//     // Paper Conditions
-//     // Win
-//     else if (playerSelection === "Paper" && computerSelection === "Rock") {
-//         results = `YOU WIN! ${playerSelection} beats ${computerSelection}!`
-//     }
-//     // Lose
-//     else if (playerSelection === "Paper" && computerSelection === "Scissors") {
-//         results = `YOU LOSE! ${computerSelection} beats ${playerSelection}!`
-//     }
-//     // Tie
-//     else if (playerSelection === "Paper" && computerSelection === "Paper") {
-//         results = `TIE GAME!`
-//     }
+function game() {
+    gameChoices();
 
-//     // Scissors Conditions
-//     // Win
-//     else if (playerSelection === "Scissors" && computerSelection === "Paper") {
-//         results = `YOU WIN! ${playerSelection} beats ${computerSelection}!`
-//     }
-//     // Lose
-//     else if (playerSelection === "Scissors" && computerSelection === "Rock") {
-//         results = `YOU LOSE! ${computerSelection} beats ${playerSelection}!`
-//     }
-//     // Tie
-//     else if (playerSelection === "Scissors" && computerSelection === "Scissors") {
-//         results = `TIE GAME!`
-//     }
-//    // Error
-//     else {
-//         results = `ERROR! Something went wrong!`
-//     }
-//     // Return game result
-//     console.log(results);
+    const gameOptions = document.querySelectorAll(".gameBtn");
+    gameOptions.forEach(button => button.addEventListener("click", function (e) {
+        let roundResult = playRound(this.innerText, computerPlay());
+        let scoreArray = score(roundResult);
+        gameResult.innerText = roundResult;
+        scoreBoard.innerText = `${scoreArray[0]} - ${scoreArray[1]}`;
+        resultContainer.appendChild(gameResult);
+        resultContainer.appendChild(scoreBoard);
+    }))
 
-//     return results;
-// }
-
+    
+}
 // function game() {
 //     // Variable to count round wins
 //     let playerWins = 0;
