@@ -12,4 +12,4 @@ A GUI consisting of HTML and CSS will be added later on.
 Game is currently played in console logs (07/05/2022).
 
 # Live Preview
-[Rock Paper Scissors Web Link](https://nainsworth.github.io/rock-paper-scissors/)
+[Rock Paper Scissors Web Link](https://META-N1CK.github.io/rock-paper-scissors/)
